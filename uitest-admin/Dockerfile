@@ -39,13 +39,10 @@ RUN apk -q update && \
              ${work_dir}/screenshots/ && \
     chmod -R 775 ${work_dir}
 
-# --- Copy project files with correct ownership ---
-COPY --chown=${container_user_uid}:${container_user_gid} ./entrypoint.sh ${work_dir}/entrypoint.sh
-COPY --chown=${container_user_uid}:${container_user_gid} ./target/*.jar ${work_dir}/
-COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/featurefiles/ ${work_dir}/featurefiles/
-COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/ ${work_dir}/src/main/resources/
-COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/extent.properties ${work_dir}/src/test/resources/extent.properties
-COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/java/utils/ ${work_dir}/src/main/java/utils/
+# Copy your application files into the container
+COPY --chown=${container_user_uid}:${container_user} --chmod=771 ./entrypoint.sh ${work_dir}/entrypoint.sh
+COPY --chown=${container_user}:${container_user} ./src/main/resources/ ${work_dir}/resources/
+COPY --chown=${container_user_uid}:${container_user} ./target/*.jar ${work_dir}
 
 # --- Fix permissions for entrypoint and JARs ---
 RUN chmod +x ${work_dir}/entrypoint.sh && \
