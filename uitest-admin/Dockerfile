@@ -46,7 +46,6 @@ COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/fe
 COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/ ${work_dir}/src/main/resources/
 COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/resources/extent.properties ${work_dir}/src/test/resources/extent.properties
 COPY --chown=${container_user_uid}:${container_user_gid} ./src/main/java/utils/ ${work_dir}/src/main/java/utils/
-COPY --chown=${container_user_uid}:${container_user_gid} ./testNgXmlFiles/ ${work_dir}/testNgXmlFiles/
 
 # --- Fix permissions for entrypoint and JARs ---
 RUN chmod +x ${work_dir}/entrypoint.sh && \
